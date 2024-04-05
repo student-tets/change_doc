@@ -15,3 +15,18 @@
 
 
 # импорты
+import asyncio  # библиотека для асинхронного программирования
+from aiogram import Bot, Dispatcher, types
+from config import TOKEN
+
+# создание экземпляров классов Bot и Dispatcher
+bot = Bot(token=TOKEN)
+dp = Dispatcher()
+
+# асинхронный вызов функции ??!?!?!?
+async def start():
+    await dp.start_polling(bot)
+
+# запуск бота через long_polling
+if __name__ == "__main__":
+    asyncio.run(start())
