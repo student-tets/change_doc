@@ -21,18 +21,18 @@ from config import TOKEN
 from handlers import register_message_handler
 
 
-# создание экземпляров классов Bot и Dispatcher
-bot = Bot(token=TOKEN)
-dp = Dispatcher()
-
-
 # асинхронный вызов функции - конкурентный вызов с ожиданием события для продолжения процесса выполнения
+async def main():
+    # создание экземпляров классов Bot и Dispatcher
+    bot = Bot(token=TOKEN)
+    dp = Dispatcher()
 
+    # функция для вызова хендлеров из пакета handlers
+    register_message_handler(dp)
 
-async def start():
     await dp.start_polling(bot)
 
 
 # запуск бота через long_polling
 if __name__ == "__main__":
-    asyncio.run(start())
+    asyncio.run(main())
