@@ -15,6 +15,7 @@
 
 
 # импорты
+import logging  # библиотека логирования (журналирование)
 import asyncio  # библиотека для асинхронного программирования
 from aiogram import Bot, Dispatcher, types
 from config import TOKEN
@@ -23,6 +24,11 @@ from handlers import register_message_handler
 
 # асинхронный вызов функции - конкурентный вызов с ожиданием события для продолжения процесса выполнения
 async def main():
+    """Настройки перед запуском"""
+
+    # уровень логирования
+    logging.basicConfig(level=logging.DEBUG)
+
     # создание экземпляров классов Bot и Dispatcher
     bot = Bot(token=TOKEN)
     dp = Dispatcher()
@@ -35,4 +41,8 @@ async def main():
 
 # запуск бота через long_polling
 if __name__ == "__main__":
-    asyncio.run(main())
+    # обработка исключений try-except
+    try:
+        asyncio.run(main())
+    except(KeyboardInterrupt, SystemExit):
+        logging.info("Goodbye!")
