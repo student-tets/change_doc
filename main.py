@@ -22,6 +22,7 @@ import asyncio  # библиотека для асинхронного прог�
 from aiogram import Bot, Dispatcher, types
 from config import TOKEN
 from handlers import register_message_handler
+from db import async_create_table
 
 
 # асинхронный вызов функции - конкурентный вызов с ожиданием события для продолжения процесса выполнения
@@ -45,6 +46,7 @@ async def main():
 if __name__ == "__main__":
     # обработка исключений try-except
     try:
+        asyncio.run(async_create_table())
         asyncio.run(main())
     except(KeyboardInterrupt, SystemExit):
         logging.info("Goodbye!")
