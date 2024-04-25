@@ -1,4 +1,4 @@
-# Этап 3
+# Этап 4
 
 # Дополнительный гайд по aiogram https://mastergroosha.github.io/aiogram-3-guide/quickstart/
 # Дополнительный гайд по асинхронному бэкенду https://habr.com/ru/companies/kts/articles/598575/
@@ -24,7 +24,6 @@ from config import TOKEN
 from handlers import register_message_handler
 from handlers import commands_for_bot
 from db import async_create_table
-
 
 
 # асинхронный вызов функции - конкурентный вызов с ожиданием события для продолжения процесса выполнения
