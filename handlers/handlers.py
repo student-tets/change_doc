@@ -10,6 +10,7 @@ from aiogram.filters.command import Command
 from sqlalchemy import select, insert
 from sqlalchemy.ext.asyncio import AsyncSession
 from db import async_session_maker, User
+from .keyboards import keyboard_continue
 
 
 # настройка логирования
@@ -51,6 +52,8 @@ async def status_command(message: types.Message):
         user = result.scalar()
         await message.reply(f"User ID: {user.user_id}\nUser name: {user.username}")
         logging.info(f"user {message.from_user.id} is asking for status")
+
+    await message.reply("Хотите ли вы продолжить?", reply_markup=keyboard_continue)
 
 
 def register_message_handler(router: Router):
