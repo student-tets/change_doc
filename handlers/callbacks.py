@@ -1,3 +1,4 @@
+import logging
 from aiogram.types import CallbackQuery
 from sqlalchemy.ext.asyncio import AsyncSession
 from db import async_session_maker
@@ -18,3 +19,4 @@ async def callback_continue(callback: CallbackQuery):
         await session.commit()
 
     await callback.message.answer("Успешно!")
+    logging.info(f"user {callback.from_user.id} pressed continue button")
