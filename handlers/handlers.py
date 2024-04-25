@@ -49,5 +49,5 @@ async def echo_command(message: types.Message):
 
 def register_message_handler(router: Router):
     """Маршрутизация"""
-    router.message.register(process_start_command, Command(commands=["start", "help"]))
+    router.message.register(help_command, Command(commands=["start", "help"]))
     router.message.register(echo_command)
