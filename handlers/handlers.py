@@ -21,10 +21,11 @@ logger = logging.getLogger(__name__)
 
 # help_command
 help_str = """
-Вас приветствует бот Хихигс бот\n
-Вы можете вывести справочную информацию, отправив команду /help\n
-Информацию о пользователе можно вывести с помощью команды /status
+Вас приветствует бот <b><i>ИМЯ БОТА</i></b>\n
+💬 Вы можете вывести справочную информацию, отправив команду <b>/help</b>\n
+💬 Информацию о пользователе можно вывести с помощью команды <b>/status</b>
 """
+
 
 async def help_command(message: types.Message):
     """справочная команда, регистрация пользователя"""
@@ -35,7 +36,7 @@ async def help_command(message: types.Message):
         user_exit = await session.execute(query)
 
         if user_exit.scalars().all():
-            await message.reply(help_str)
+            await message.reply(text=help_str, parse_mode="HTML")
             logging.info(f"user {message.from_user.id} asks for help")
 
         else:
@@ -58,8 +59,9 @@ async def status_command(message: types.Message):
         query = select(User).where(User.user_id == message.from_user.id)
         result = await session.execute(query)
         user = result.scalar()
-        await message.reply(text=f"User ID: {user.user_id}\n"
-                                 f"User name: {user.username}")
+        await message.reply(text=f"<b>User ID</b>: <i>{user.user_id}</i>\n"
+                                 f"<b>User name</b>: <i>{user.username}</i>",
+                                 parse_mode="HTML")
         logging.info(f"user {message.from_user.id} is asking for status")
 
     await message.reply("Хотите ли вы продолжить?", reply_markup=keyboard_continue)
