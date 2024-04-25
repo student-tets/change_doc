@@ -22,7 +22,9 @@ import asyncio  # библиотека для асинхронного прог�
 from aiogram import Bot, Dispatcher, types
 from config import TOKEN
 from handlers import register_message_handler
+from handlers import commands_for_bot
 from db import async_create_table
+
 
 
 # асинхронный вызов функции - конкурентный вызов с ожиданием события для продолжения процесса выполнения
@@ -39,6 +41,8 @@ async def main():
     # функция для вызова хендлеров из пакета handlers
     register_message_handler(dp)
 
+    # передача списка команд боту
+    await bot.set_my_commands(commands=commands_for_bot)
     await dp.start_polling(bot)
 
 
