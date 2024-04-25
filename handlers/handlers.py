@@ -41,13 +41,19 @@ async def help_command(message: types.Message):
             logging.info(f"register new user: {message.from_user.id}")
 
 
-# @dp.message()
-async def echo_command(message: types.Message):
-    """Эхо-ответ"""
-    await message.answer(message.text)
-    logging.info(f'bot echos message from user {message.from_user.id}')
+async def status_command(message: types.Message):
+    """Информация о пользователе"""
+
+    async with async_session_maker() as session:
+        session: AsyncSession
+        query = select(User).where(User.user_id == message.from_user.id)
+        result = await session.execute(query)
+        user = result.scalar()
+        await message.reply(f"User ID: {user.user_id}\nUser name: {user.username}")
+        logging.info(f"user {message.from_user.id} is asking for status")
+
 
 def register_message_handler(router: Router):
     """Маршрутизация"""
     router.message.register(help_command, Command(commands=["start", "help"]))
-    router.message.register(echo_command)
+    router.message.register(status_command, Command(commands=["status"]))
