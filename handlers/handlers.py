@@ -4,13 +4,14 @@ __all__ = [
 
 
 import logging
-from aiogram import Router
+from aiogram import Router, F
 from aiogram import types
 from aiogram.filters.command import Command
 from sqlalchemy import select, insert
 from sqlalchemy.ext.asyncio import AsyncSession
 from db import async_session_maker, User
 from .keyboards import keyboard_continue
+from .callbacks import callback_continue
 
 
 # настройка логирования
@@ -60,3 +61,4 @@ def register_message_handler(router: Router):
     """Маршрутизация"""
     router.message.register(help_command, Command(commands=["start", "help"]))
     router.message.register(status_command, Command(commands=["status"]))
+    router.callback_query.register(callback_continue, F.data.startwith("continue_"))
