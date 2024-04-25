@@ -19,6 +19,13 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
+# help_command
+help_str = """
+Вас приветствует бот Хихигс бот\n
+Вы можете вывести справочную информацию, отправив команду /help\n
+Информацию о пользователе можно вывести с помощью команды /status
+"""
+
 async def help_command(message: types.Message):
     """справочная команда, регистрация пользователя"""
 
@@ -28,7 +35,7 @@ async def help_command(message: types.Message):
         user_exit = await session.execute(query)
 
         if user_exit.scalars().all():
-            await message.reply("Ты есть!")
+            await message.reply(help_str)
             logging.info(f"user {message.from_user.id} asks for help")
 
         else:
@@ -39,7 +46,7 @@ async def help_command(message: types.Message):
             stmt = insert(User).values(**new_user)
             await session.execute(stmt)
             await session.commit()
-            await message.reply("Теперь ты есть!")
+            await message.reply(help_str)
             logging.info(f"register new user: {message.from_user.id}")
 
 
@@ -51,7 +58,8 @@ async def status_command(message: types.Message):
         query = select(User).where(User.user_id == message.from_user.id)
         result = await session.execute(query)
         user = result.scalar()
-        await message.reply(f"User ID: {user.user_id}\nUser name: {user.username}")
+        await message.reply(text=f"User ID: {user.user_id}\n"
+                                 f"User name: {user.username}")
         logging.info(f"user {message.from_user.id} is asking for status")
 
     await message.reply("Хотите ли вы продолжить?", reply_markup=keyboard_continue)
