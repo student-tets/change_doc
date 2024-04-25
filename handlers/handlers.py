@@ -61,4 +61,4 @@ def register_message_handler(router: Router):
     """Маршрутизация"""
     router.message.register(help_command, Command(commands=["start", "help"]))
     router.message.register(status_command, Command(commands=["status"]))
-    router.callback_query.register(callback_continue, F.data.startwith("continue_"))
+    router.callback_query.register(callback_continue, F.data.startswith("continue_"))
