@@ -1,3 +1,8 @@
+__all__ = [
+    "register_message_handler",
+]
+
+
 import logging
 from aiogram import Router
 from aiogram import types
