@@ -1,4 +1,4 @@
-# Этап 1
+# Этап 3
 
 # Дополнительный гайд по aiogram https://mastergroosha.github.io/aiogram-3-guide/quickstart/
 # Дополнительный гайд по асинхронному бэкенду https://habr.com/ru/companies/kts/articles/598575/
@@ -7,6 +7,8 @@
 # Установить библиотеки и фреймворки aiogram==3.4
 # pip install aiogram
 # pip install python-dotenv
+# pip install sqlalchemy
+# pip install aiosqlite
 
 # Для сохранения текущих пакетов в проекте и их версий при переносе используйте файл requirements.txt
 # pip freeze — внешние пакеты проекта
