@@ -6,7 +6,7 @@ from aiogram import types
 
 bot_commands = (
     ("help", "Справка по боту"),
-    # TODO ("status", "Показать статус пользователя"),
+    ("status", "Показать статус пользователя"),
 )
 
 commands_for_bot = []
